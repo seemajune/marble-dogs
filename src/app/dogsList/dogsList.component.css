@@ -1,0 +1,21 @@
+ul {
+    display: flex;
+    flex-flow: column wrap;
+    margin: 0;
+    padding: 0;
+}
+
+li {
+    list-style: none;
+}
+
+.list-group-item {
+    cursor: pointer;
+    padding: 10px;
+}
+
+.list-group-item.active {
+    color:#FEFCFD;
+    background-color: #3B3355;
+}
+

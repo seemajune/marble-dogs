@@ -1,0 +1,11 @@
+<ng-container *ngIf="!busy">
+    <div *ngFor="let image of images;" class="card">
+        <img src={{image}} alt="Loading image" />
+    </div>
+</ng-container>
+<ng-container *ngIf="busy">
+    <div role="alert" class="loading">
+        Loading {{selected|uppercase}} images...
+    </div>
+</ng-container>
+
