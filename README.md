@@ -1,5 +1,13 @@
 # MarbleDogs
 
+To Do:
+
+1. Clone this repo
+2. Create a branch `yourname/solution` 
+3. Create a file `src/app/store/dogs/dogs.effects.spec.ts`
+4. Add imports and write marble tests to test the DogEffects!
+
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.0.0-rc.4.
 
 ## Development server

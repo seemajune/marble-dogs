@@ -1,3 +1,13 @@
-<h1>
-  {{title}}
-</h1>
+<div class="container">
+    <div class="header">
+        <h1>
+            {{title}}
+        </h1>
+      </div>
+      <navbar [title]="title" (filterTyped)="filterDogsList($event)" class="navbar"></navbar>
+    <div class="breeds">
+        <dogs-list [dogs]="(dogs$|async)" [selected]="(selected$|async)" (dogClicked)="dogSelected($event)"></dogs-list>
+    </div>
+    <gallery [images]="(images$|async)" [selected]="selected" [busy]="dogService.fetchingImages" class="gallery">
+    </gallery>
+</div>

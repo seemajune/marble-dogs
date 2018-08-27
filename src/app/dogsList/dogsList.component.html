@@ -1,0 +1,7 @@
+<ul>
+    <li *ngFor="let dog of dogs;trackBy:dog" 
+        [class.active]="isSelected(dog)" 
+        class="list-group-item" 
+        (click)="clicked(dog)">{{dog|uppercase}}
+    </li>
+</ul>

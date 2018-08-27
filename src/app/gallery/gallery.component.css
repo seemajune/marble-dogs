@@ -1,0 +1,19 @@
+img {
+    height: auto;
+    width: 200px;
+    position: absolute;
+}
+
+.card {
+    position: relative;
+    height: 175px;
+    width: 200px;
+    overflow: auto;
+}
+
+.loading {
+    font-size: 2em;
+    color: #FEFCFD;
+}
+
+/* make images into grid */
