@@ -12,7 +12,7 @@ import { DogService } from '../../dogs/dogs.service';
 
 describe('Dog Effects', () => {
   let effects: DogEffects;
-  let actions: Observable<any>;
+  let actions$: Observable<any>;
   let dogService: any;
   const mockDogBreeds = ['affenpinscher'];
   const mockDogBreedImages = ['img'];
@@ -24,7 +24,7 @@ describe('Dog Effects', () => {
       ],
       providers: [
         DogEffects,
-        provideMockActions(() => actions),
+        provideMockActions(() => actions$),
         {
           provide: DogService,
           useValue: jasmine.createSpyObj('DogService', [
@@ -45,7 +45,7 @@ describe('Dog Effects', () => {
     const selected = new DogActions.DogSelected(mockDogBreeds[0]);
     const images = new DogActions.DogImagesLoading(mockDogBreeds[0]);
     // hot stream keeps going, hence -------
-    actions =         hot('-a-------', { a: action });
+    actions$ =         hot('-a-------', { a: action });
     // emit 1 frame, then on frame 2 emit the mock http response, then end on frame 3
     const response = cold('-b|', { b: mockDogBreeds });
     // emit 2 frames, then on frame 3 emit the completed actions. 
@@ -62,7 +62,7 @@ describe('Dog Effects', () => {
 
     const completion = new DogActions.DogImagesLoadSuccess(mockDogBreedImages);
 
-    actions =         hot('-a-------', { a: action });
+    actions$ =         hot('-a-------', { a: action });
     const response = cold('-b|', { b: mockDogBreedImages });
     const expected = cold('--c', { c: completion });
 
@@ -77,7 +77,7 @@ describe('Dog Effects', () => {
 
     const completion = new DogActions.DogsLoadFail();
     
-    actions =         hot('-a--', { a: action });
+    actions$ =         hot('-a--', { a: action });
     const response = cold('-#');
     const expected = cold('-(c|)', { c: completion });
 
