@@ -27,7 +27,7 @@ loadDogs$: Observable<Action> = this.actions$
     .ofType(DogActions.DOGS_LOADING)
     .exhaustMap((action: any) => this.dogService.getListOfDogBreeds(action.payload))
     .pipe(
-        concatMap(data => [
+        concatMap(data => [ //emit all 3 values synchronously in the same frame
             new DogActions.DogsLoadSuccess(data),
             new DogActions.DogSelected(data[0]),
             new DogActions.DogImagesLoading(data[0])

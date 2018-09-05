@@ -46,10 +46,11 @@ describe('Dog Effects', () => {
     const images = new DogActions.DogImagesLoading(mockDogBreeds[0]);
     // hot stream keeps going, hence -------
     actions$ =         hot('-a-------', { a: action });
-    // emit 1 frame, then on frame 2 emit the mock http response, then end on frame 3
+    // emit 1 frame, (10 virtual ms) then on frame 2 emit the mock http response, then end on frame 3
     const response = cold('-b|', { b: mockDogBreeds });
-    // emit 2 frames, then on frame 3 emit the completed actions. 
+    // emit 2 frames, then on frame 3 emit a,b, and c synchronously in the same frame.
     // this aligns with the ending of the cold stream on frame 3 in the response stream above.
+
     const expected = cold('--(cde)', { c: completion, d: selected, e: images });
 
     dogService.getListOfDogBreeds.and.returnValue(response);
