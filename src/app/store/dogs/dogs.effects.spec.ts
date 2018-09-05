@@ -62,7 +62,7 @@ describe('Dog Effects', () => {
 
     const completion = new DogActions.DogImagesLoadSuccess(mockDogBreedImages);
 
-    actions$ =         hot('-a-------', { a: action });
+    actions$ =        hot('-a-------', { a: action });
     const response = cold('-b|', { b: mockDogBreedImages });
     const expected = cold('--c', { c: completion });
 
@@ -77,7 +77,7 @@ describe('Dog Effects', () => {
 
     const completion = new DogActions.DogsLoadFail();
     
-    actions$ =         hot('-a--', { a: action });
+    actions$ =        hot('-a--', { a: action });
     const response = cold('-#');
     const expected = cold('-(c|)', { c: completion });
 
