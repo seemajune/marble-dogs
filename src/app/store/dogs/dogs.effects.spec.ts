@@ -37,7 +37,7 @@ describe('Dog Effects', () => {
     effects = TestBed.get(DogEffects);
     dogService = TestBed.get(DogService);
   });
-
+// todo : create a new branch with empty assertions
   it('should load dogs by breed', () => {
     const action = new DogActions.DogsLoading(mockDogBreeds[0]);
 
@@ -45,15 +45,18 @@ describe('Dog Effects', () => {
     const selected = new DogActions.DogSelected(mockDogBreeds[0]);
     const images = new DogActions.DogImagesLoading(mockDogBreeds[0]);
     // hot stream keeps going, hence -------
-    actions$ =         hot('-a-------', { a: action });
+    actions$ = hot(       '-a-------', { a: action });
+    // dogService.getListOfDogBreeds.and.returnValue(response);
     // emit 1 frame, (10 virtual ms) then on frame 2 emit the mock http response, then end on frame 3
     const response = cold('-b|', { b: mockDogBreeds });
+    dogService.getListOfDogBreeds.and.returnValue(response);
     // emit 2 frames, then on frame 3 emit a,b, and c synchronously in the same frame.
     // this aligns with the ending of the cold stream on frame 3 in the response stream above.
 
     const expected = cold('--(cde)', { c: completion, d: selected, e: images });
-
-    dogService.getListOfDogBreeds.and.returnValue(response);
+// order matters 
+// create empty tests in the master branch
+    // dogService.getListOfDogBreeds.and.returnValue(response);
 
     expect(effects.loadDogs$).toBeObservable(expected);
   });
@@ -63,11 +66,11 @@ describe('Dog Effects', () => {
 
     const completion = new DogActions.DogImagesLoadSuccess(mockDogBreedImages);
 
-    actions$ =        hot('-a-------', { a: action });
+    actions$ = hot(       '-a---', { a: action });
     const response = cold('-b|', { b: mockDogBreedImages });
-    const expected = cold('--c', { c: completion });
-
     dogService.getBreedImages.and.returnValue(response);
+
+    const expected = cold('--c', { c: completion });
 
     expect(effects.loadDogImages$).toBeObservable(expected);
 
@@ -78,7 +81,7 @@ describe('Dog Effects', () => {
 
     const completion = new DogActions.DogsLoadFail();
     
-    actions$ =        hot('-a--', { a: action });
+    actions$ = hot(       '-a--', { a: action });
     const response = cold('-#');
     const expected = cold('-(c|)', { c: completion });
 
